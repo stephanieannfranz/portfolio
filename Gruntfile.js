@@ -49,10 +49,31 @@ module.exports = function(grunt) {
       }
     },
 
+    postcss: {
+      options: {
+        processors:[
+          require('autoprefixer')(),
+        ]
+      },
+      dist: {
+        src:'css/src/style.css',
+        dest:'css/dest/style.css',
+      }
+    },
+
+    watch: {
+      css: {
+        files: ['css/src/*.css'],
+        tasks: ['postcss'],
+      },
+    }
+
   });
 
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-imageoptim');
+  grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('images', ['imageoptim']);
 
